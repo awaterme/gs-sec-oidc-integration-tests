@@ -1,0 +1,43 @@
+server:
+  port: 9000
+  servlet:
+    session:
+      cookie:
+        # avoid conflict with cookie of regular application
+        name: AUTH_SESSIONID
+
+logging:
+  level:
+    org.springframework.security: debug
+    org.geoserver: trace
+
+spring:
+  application:
+    name: auth-server
+  security:
+    user:
+      name: spring
+      password: geoserver
+    oauth2:
+      authorizationserver:
+        client:
+          oidc-client:
+            registration:
+              client-id: "geoserver"
+              client-secret: "{noop}secret"
+              client-authentication-methods:
+                - "client_secret_basic"
+                - "client_secret_post"
+              authorization-grant-types:
+                - "authorization_code"
+                - "refresh_token"
+              redirect-uris:
+                - "http://127.0.0.1:8080/geoserver/login/oauth2/code/oidc"
+              post-logout-redirect-uris:
+                - "http://127.0.0.1:8080/geoserver/web/"
+              scopes:
+                - "openid"
+                - "profile"
+            require-authorization-consent: true
+            token:
+              access-token-time-to-live: 86400000
