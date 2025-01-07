@@ -32,9 +32,9 @@ spring:
                 - "authorization_code"
                 - "refresh_token"
               redirect-uris:
-                - "http://127.0.0.1:8080/geoserver/login/oauth2/code/oidc"
+                - "http://localhost:8080/geoserver/login/oauth2/code/oidc"
               post-logout-redirect-uris:
-                - "http://127.0.0.1:8080/geoserver/web/"
+                - "http://localhost:8080/geoserver/web/"
               scopes:
                 - "openid"
                 - "profile"
